@@ -10,7 +10,7 @@ const project = projectData[projectId];
 const navigate = useNavigate();
 useKeypress(['ArrowLeft', 'ArrowRight'], (e)=> {
   if (e.key === 'ArrowLeft' && id>1) navigate(`/projects/${id-1}`);
-  if (e.key === 'ArrowRight' && id<3) navigate(`/projects/${id+1}`);
+  if (e.key === 'ArrowRight' && id<projectData.length-1) navigate(`/projects/${id+1}`);
 })
 
   return (
@@ -25,9 +25,9 @@ useKeypress(['ArrowLeft', 'ArrowRight'], (e)=> {
         </div>
       </div>
       <div id="next-prev">
-        { id <= 3 && id >1 ? <Link to={`/projects/${id-1}`}>{`< Prev `}</Link> : <div></div>}
+        { id >1 ? <Link to={`/projects/${id-1}`}>{`< Prev `}</Link> : <div></div>}
 
-        { id >= 1 && id < 3 ? <Link to={`/projects/${id+1}`}>{` Next >`}</Link> : null}
+        { id < projectData.length-1 ? <Link to={`/projects/${id+1}`}>{` Next >`}</Link> : null}
       </div>
     </div>
   )
