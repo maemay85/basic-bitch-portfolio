@@ -1,10 +1,17 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import useKeypress from 'react-use-keypress';
 import projectData from "../assets/projectData";
 
 function SingleProject() {
 
 const { projectId } = useParams();
+const id = Number(projectId);
 const project = projectData[projectId];
+const navigate = useNavigate();
+useKeypress(['ArrowLeft', 'ArrowRight'], (e)=> {
+  if (e.key === 'ArrowLeft' && id>1) navigate(`/projects/${id-1}`);
+  if (e.key === 'ArrowRight' && id<3) navigate(`/projects/${id+1}`);
+})
 
   return (
     <div id="single-project">
@@ -18,9 +25,9 @@ const project = projectData[projectId];
         </div>
       </div>
       <div id="next-prev">
-        { Number(projectId) <= 3 && Number(projectId) >1 ? <Link to={`/projects/${Number(projectId)-1}`}>{`< Prev `}</Link> : <div></div>}
+        { id <= 3 && id >1 ? <Link to={`/projects/${id-1}`}>{`< Prev `}</Link> : <div></div>}
 
-        { Number(projectId) >= 1 && Number(projectId) < 3 ? <Link to={`/projects/${Number(projectId)+1}`}>{` Next >`}</Link> : null}
+        { id >= 1 && id < 3 ? <Link to={`/projects/${id+1}`}>{` Next >`}</Link> : null}
       </div>
     </div>
   )
