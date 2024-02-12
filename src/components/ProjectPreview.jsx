@@ -5,12 +5,14 @@ function ProjectPreview(props) {
   const project = props.project;
 
     return (
-      <div className="single-project-container">
-       <Link to={`/projects/${project.projectId}`}>
-        <h2>{project.title}</h2>
-       </Link>
-
-      </div>
+      <>
+        <Link to={`/projects/${project.projectId}`}>
+          <div className="project-preview">
+            <img src={project.imageUrl} />
+            <h2>{project.title}</h2>
+          </div>
+        </Link>
+      </>
     )
   }
 
